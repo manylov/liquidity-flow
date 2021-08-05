@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "LiqvidityFlow",
-    "_postman_id": "3af94ddb-9012-4570-8037-343609f64e1c",
+    "_postman_id": "7af42eb3-b226-4f90-b875-6b9df042b669",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
   "item": [
@@ -9,6 +9,849 @@
       "name": "admin",
       "description": "admin APIs",
       "item": [
+        {
+          "name": "Value",
+          "description": "Value Model APIs",
+          "item": [
+            {
+              "name": "getValue",
+              "request": {
+                "url": "http://localhost:3000/admin/value/{{id}}",
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "addValue",
+              "request": {
+                "url": "http://localhost:3000/admin/value/create",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pair\": \"610ba82e513bb785706347ac\",\n  \"time\": \"2022-06-03T17:56:08.233Z\",\n  \"value\": 595,\n  \"isDeleted\": false,\n  \"isActive\": true\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "findAllValue",
+              "request": {
+                "url": "http://localhost:3000/admin/value/list",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {},\n  \"options\": {\n    \"select\": [\n      \"field 1\",\n      \"field 2\"\n    ],\n    \"collation\": \"\",\n    \"sort\": \"\",\n    \"populate\": \"\",\n    \"projection\": \"\",\n    \"lean\": false,\n    \"leanWithId\": true,\n    \"offset\": 0,\n    \"page\": 1,\n    \"limit\": 10,\n    \"customLabels\": {},\n    \"pagination\": true,\n    \"useEstimatedCount\": false,\n    \"useCustomCountFn\": false,\n    \"forceCountFn\": false,\n    \"read\": {},\n    \"options\": {}\n  },\n  \"isCountOnly\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "getValueCount",
+              "request": {
+                "url": "http://localhost:3000/admin/value/count",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"where\": {\n    \"isActive\": true\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "aggregateValue",
+              "request": {
+                "url": "http://localhost:3000/admin/value/aggregate",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"group\": {\n    \"avg\": {\n      \"key\": {\n        \"_id\": [\n          \"field1\",\n          \"field2\"\n        ]\n      }\n    },\n    \"sum\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"min\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"max\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"addToSet\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    }\n  },\n  \"match\": {\n    \"key\": {\n      \"field\": \"value\"\n    }\n  },\n  \"project\": {\n    \"gt\": {\n      \"key\": {\n        \"field\": \"value\"\n      }\n    }\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "insertBulkValue",
+              "request": {
+                "url": "http://localhost:3000/admin/value/addBulk",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"pair\": \"610ba82e513bb785706347ac\",\n      \"time\": \"2022-06-03T17:56:08.233Z\",\n      \"value\": 595,\n      \"isDeleted\": false,\n      \"isActive\": true\n    }\n  ]\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "updateValue",
+              "request": {
+                "url": "http://localhost:3000/admin/value/update/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pair\": \"610ba82e513bb785706347ac\",\n  \"time\": \"2022-06-03T17:56:08.233Z\",\n  \"value\": 595,\n  \"isDeleted\": false,\n  \"isActive\": true\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "partialupdateValue",
+              "request": {
+                "url": "http://localhost:3000/admin/value/partial-update/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isActive\": true,\n  \"isDeleted\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "softDeleteValue",
+              "request": {
+                "url": "http://localhost:3000/admin/value/softDelete/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "updateBulkValue",
+              "request": {
+                "url": "http://localhost:3000/admin/value/updateBulk",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"isActive\": true\n  },\n  \"data\": {\n    \"isDeleted\": false\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "deleteValue",
+              "request": {
+                "url": "http://localhost:3000/admin/value/delete/{{id}}",
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isWarning\": true\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            }
+          ]
+        },
+        {
+          "name": "Pair",
+          "description": "Pair Model APIs",
+          "item": [
+            {
+              "name": "getPair",
+              "request": {
+                "url": "http://localhost:3000/admin/pair/{{id}}",
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "addPair",
+              "request": {
+                "url": "http://localhost:3000/admin/pair/create",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Orville Jacobs\",\n  \"address\": \"60916 Paucek Throughway\",\n  \"token1\": \"610ba82e513bb785706347ae\",\n  \"token2\": \"610ba82e513bb785706347af\",\n  \"isDeleted\": true,\n  \"isActive\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "findAllPair",
+              "request": {
+                "url": "http://localhost:3000/admin/pair/list",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {},\n  \"options\": {\n    \"select\": [\n      \"field 1\",\n      \"field 2\"\n    ],\n    \"collation\": \"\",\n    \"sort\": \"\",\n    \"populate\": \"\",\n    \"projection\": \"\",\n    \"lean\": false,\n    \"leanWithId\": true,\n    \"offset\": 0,\n    \"page\": 1,\n    \"limit\": 10,\n    \"customLabels\": {},\n    \"pagination\": true,\n    \"useEstimatedCount\": false,\n    \"useCustomCountFn\": false,\n    \"forceCountFn\": false,\n    \"read\": {},\n    \"options\": {}\n  },\n  \"isCountOnly\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "getPairCount",
+              "request": {
+                "url": "http://localhost:3000/admin/pair/count",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"where\": {\n    \"isActive\": true\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "aggregatePair",
+              "request": {
+                "url": "http://localhost:3000/admin/pair/aggregate",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"group\": {\n    \"avg\": {\n      \"key\": {\n        \"_id\": [\n          \"field1\",\n          \"field2\"\n        ]\n      }\n    },\n    \"sum\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"min\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"max\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"addToSet\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    }\n  },\n  \"match\": {\n    \"key\": {\n      \"field\": \"value\"\n    }\n  },\n  \"project\": {\n    \"gt\": {\n      \"key\": {\n        \"field\": \"value\"\n      }\n    }\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "insertBulkPair",
+              "request": {
+                "url": "http://localhost:3000/admin/pair/addBulk",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"Orville Jacobs\",\n      \"address\": \"60916 Paucek Throughway\",\n      \"token1\": \"610ba82e513bb785706347ae\",\n      \"token2\": \"610ba82e513bb785706347af\",\n      \"isDeleted\": true,\n      \"isActive\": false\n    }\n  ]\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "updatePair",
+              "request": {
+                "url": "http://localhost:3000/admin/pair/update/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Orville Jacobs\",\n  \"address\": \"60916 Paucek Throughway\",\n  \"token1\": \"610ba82e513bb785706347ae\",\n  \"token2\": \"610ba82e513bb785706347af\",\n  \"isDeleted\": true,\n  \"isActive\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "partialupdatePair",
+              "request": {
+                "url": "http://localhost:3000/admin/pair/partial-update/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isActive\": true,\n  \"isDeleted\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "softDeletePair",
+              "request": {
+                "url": "http://localhost:3000/admin/pair/softDelete/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "updateBulkPair",
+              "request": {
+                "url": "http://localhost:3000/admin/pair/updateBulk",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"isActive\": true\n  },\n  \"data\": {\n    \"isDeleted\": false\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "deletePair",
+              "request": {
+                "url": "http://localhost:3000/admin/pair/delete/{{id}}",
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isWarning\": true\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            }
+          ]
+        },
+        {
+          "name": "Token",
+          "description": "Token Model APIs",
+          "item": [
+            {
+              "name": "getToken",
+              "request": {
+                "url": "http://localhost:3000/admin/token/{{id}}",
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "addToken",
+              "request": {
+                "url": "http://localhost:3000/admin/token/create",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Glenn Marquardt\",\n  \"symbol\": \"Credit\",\n  \"address\": \"654 Sheldon Ports\",\n  \"isDeleted\": false,\n  \"isActive\": true\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "findAllToken",
+              "request": {
+                "url": "http://localhost:3000/admin/token/list",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {},\n  \"options\": {\n    \"select\": [\n      \"field 1\",\n      \"field 2\"\n    ],\n    \"collation\": \"\",\n    \"sort\": \"\",\n    \"populate\": \"\",\n    \"projection\": \"\",\n    \"lean\": false,\n    \"leanWithId\": true,\n    \"offset\": 0,\n    \"page\": 1,\n    \"limit\": 10,\n    \"customLabels\": {},\n    \"pagination\": true,\n    \"useEstimatedCount\": false,\n    \"useCustomCountFn\": false,\n    \"forceCountFn\": false,\n    \"read\": {},\n    \"options\": {}\n  },\n  \"isCountOnly\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "getTokenCount",
+              "request": {
+                "url": "http://localhost:3000/admin/token/count",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"where\": {\n    \"isActive\": true\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "aggregateToken",
+              "request": {
+                "url": "http://localhost:3000/admin/token/aggregate",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"group\": {\n    \"avg\": {\n      \"key\": {\n        \"_id\": [\n          \"field1\",\n          \"field2\"\n        ]\n      }\n    },\n    \"sum\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"min\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"max\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"addToSet\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    }\n  },\n  \"match\": {\n    \"key\": {\n      \"field\": \"value\"\n    }\n  },\n  \"project\": {\n    \"gt\": {\n      \"key\": {\n        \"field\": \"value\"\n      }\n    }\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "insertBulkToken",
+              "request": {
+                "url": "http://localhost:3000/admin/token/addBulk",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"Glenn Marquardt\",\n      \"symbol\": \"Credit\",\n      \"address\": \"654 Sheldon Ports\",\n      \"isDeleted\": false,\n      \"isActive\": true\n    }\n  ]\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "updateToken",
+              "request": {
+                "url": "http://localhost:3000/admin/token/update/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Glenn Marquardt\",\n  \"symbol\": \"Credit\",\n  \"address\": \"654 Sheldon Ports\",\n  \"isDeleted\": false,\n  \"isActive\": true\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "partialupdateToken",
+              "request": {
+                "url": "http://localhost:3000/admin/token/partial-update/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isActive\": true,\n  \"isDeleted\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "softDeleteToken",
+              "request": {
+                "url": "http://localhost:3000/admin/token/softDelete/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "updateBulkToken",
+              "request": {
+                "url": "http://localhost:3000/admin/token/updateBulk",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"isActive\": true\n  },\n  \"data\": {\n    \"isDeleted\": false\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "deleteToken",
+              "request": {
+                "url": "http://localhost:3000/admin/token/delete/{{id}}",
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isWarning\": true\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            }
+          ]
+        },
         {
           "name": "user",
           "description": "user Model APIs",
@@ -57,7 +900,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"username\": \"Ron Buckridge\",\n  \"password\": \"yhCi9jcrhOHqJ5k\",\n  \"email\": \"Raymond_Abernathy@yahoo.com\",\n  \"name\": \"Dr. Carla Doyle\",\n  \"isDeleted\": false,\n  \"isActive\": true,\n  \"role\": 1\n}"
+                  "raw": "{\n  \"username\": \"Max Hamill\",\n  \"password\": \"nsOP69Js1x5RaL9\",\n  \"email\": \"Lizeth_Medhurst5@yahoo.com\",\n  \"name\": \"Nina Erdman Jr.\",\n  \"isDeleted\": false,\n  \"isActive\": false,\n  \"role\": 1\n}"
                 },
                 "description": ""
               },
@@ -157,7 +1000,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"data\": [\n    {\n      \"username\": \"Ron Buckridge\",\n      \"password\": \"yhCi9jcrhOHqJ5k\",\n      \"email\": \"Raymond_Abernathy@yahoo.com\",\n      \"name\": \"Dr. Carla Doyle\",\n      \"isDeleted\": false,\n      \"isActive\": true,\n      \"role\": 1\n    }\n  ]\n}"
+                  "raw": "{\n  \"data\": [\n    {\n      \"username\": \"Max Hamill\",\n      \"password\": \"nsOP69Js1x5RaL9\",\n      \"email\": \"Lizeth_Medhurst5@yahoo.com\",\n      \"name\": \"Nina Erdman Jr.\",\n      \"isDeleted\": false,\n      \"isActive\": false,\n      \"role\": 1\n    }\n  ]\n}"
                 },
                 "description": ""
               },
@@ -182,7 +1025,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"username\": \"Ron Buckridge\",\n  \"password\": \"yhCi9jcrhOHqJ5k\",\n  \"email\": \"Raymond_Abernathy@yahoo.com\",\n  \"name\": \"Dr. Carla Doyle\",\n  \"isDeleted\": false,\n  \"isActive\": true,\n  \"role\": 1\n}"
+                  "raw": "{\n  \"username\": \"Max Hamill\",\n  \"password\": \"nsOP69Js1x5RaL9\",\n  \"email\": \"Lizeth_Medhurst5@yahoo.com\",\n  \"name\": \"Nina Erdman Jr.\",\n  \"isDeleted\": false,\n  \"isActive\": false,\n  \"role\": 1\n}"
                 },
                 "description": ""
               },
@@ -282,7 +1125,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"username\": \"Ron Buckridge\",\n  \"password\": \"yhCi9jcrhOHqJ5k\",\n  \"email\": \"Raymond_Abernathy@yahoo.com\",\n  \"name\": \"Dr. Carla Doyle\",\n  \"isDeleted\": false,\n  \"isActive\": true,\n  \"role\": 1\n}"
+                  "raw": "{\n  \"username\": \"Max Hamill\",\n  \"password\": \"nsOP69Js1x5RaL9\",\n  \"email\": \"Lizeth_Medhurst5@yahoo.com\",\n  \"name\": \"Nina Erdman Jr.\",\n  \"isDeleted\": false,\n  \"isActive\": false,\n  \"role\": 1\n}"
                 },
                 "description": ""
               },
@@ -353,7 +1196,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"username\": \"Ron Buckridge\",\n  \"password\": \"yhCi9jcrhOHqJ5k\",\n  \"email\": \"Raymond_Abernathy@yahoo.com\",\n  \"name\": \"Dr. Carla Doyle\",\n  \"isDeleted\": false,\n  \"isActive\": true,\n  \"role\": 1\n}"
+                  "raw": "{\n  \"username\": \"Max Hamill\",\n  \"password\": \"nsOP69Js1x5RaL9\",\n  \"email\": \"Lizeth_Medhurst5@yahoo.com\",\n  \"name\": \"Nina Erdman Jr.\",\n  \"isDeleted\": false,\n  \"isActive\": false,\n  \"role\": 1\n}"
                 },
                 "description": ""
               },
@@ -494,7 +1337,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Albert Beatty\",\n  \"code\": \"Car\",\n  \"weight\": 54,\n  \"isDeleted\": true,\n  \"isActive\": true\n}"
+                  "raw": "{\n  \"name\": \"Edith Douglas\",\n  \"code\": \"Mississippi\",\n  \"weight\": 804,\n  \"isDeleted\": true,\n  \"isActive\": true\n}"
                 },
                 "description": ""
               },
@@ -519,7 +1362,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"Albert Beatty\",\n      \"code\": \"Car\",\n      \"weight\": 54,\n      \"isDeleted\": true,\n      \"isActive\": true\n    }\n  ]\n}"
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"Edith Douglas\",\n      \"code\": \"Mississippi\",\n      \"weight\": 804,\n      \"isDeleted\": true,\n      \"isActive\": true\n    }\n  ]\n}"
                 },
                 "description": ""
               },
@@ -619,7 +1462,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Albert Beatty\",\n  \"code\": \"Car\",\n  \"weight\": 54,\n  \"isDeleted\": true,\n  \"isActive\": true\n}"
+                  "raw": "{\n  \"name\": \"Edith Douglas\",\n  \"code\": \"Mississippi\",\n  \"weight\": 804,\n  \"isDeleted\": true,\n  \"isActive\": true\n}"
                 },
                 "description": ""
               },
@@ -644,7 +1487,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Albert Beatty\",\n  \"code\": \"Car\",\n  \"weight\": 54,\n  \"isDeleted\": true,\n  \"isActive\": true,\n  \"id\": \"{{id}}\"\n}"
+                  "raw": "{\n  \"name\": \"Edith Douglas\",\n  \"code\": \"Mississippi\",\n  \"weight\": 804,\n  \"isDeleted\": true,\n  \"isActive\": true,\n  \"id\": \"{{id}}\"\n}"
                 },
                 "description": ""
               },
@@ -719,7 +1562,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Albert Beatty\",\n  \"code\": \"Car\",\n  \"weight\": 54,\n  \"isDeleted\": true,\n  \"isActive\": true\n}"
+                  "raw": "{\n  \"name\": \"Edith Douglas\",\n  \"code\": \"Mississippi\",\n  \"weight\": 804,\n  \"isDeleted\": true,\n  \"isActive\": true\n}"
                 },
                 "description": ""
               },
@@ -775,7 +1618,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"route_name\": \"IB\",\n  \"method\": \"Refined\",\n  \"uri\": \"Handmade\",\n  \"isDeleted\": true,\n  \"isActive\": false\n}"
+                  "raw": "{\n  \"route_name\": \"Granite\",\n  \"method\": \"hack\",\n  \"uri\": \"dynamic\",\n  \"isDeleted\": false,\n  \"isActive\": true\n}"
                 },
                 "description": ""
               },
@@ -800,7 +1643,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"data\": [\n    {\n      \"route_name\": \"IB\",\n      \"method\": \"Refined\",\n      \"uri\": \"Handmade\",\n      \"isDeleted\": true,\n      \"isActive\": false\n    }\n  ]\n}"
+                  "raw": "{\n  \"data\": [\n    {\n      \"route_name\": \"Granite\",\n      \"method\": \"hack\",\n      \"uri\": \"dynamic\",\n      \"isDeleted\": false,\n      \"isActive\": true\n    }\n  ]\n}"
                 },
                 "description": ""
               },
@@ -900,7 +1743,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"route_name\": \"IB\",\n  \"method\": \"Refined\",\n  \"uri\": \"Handmade\",\n  \"isDeleted\": true,\n  \"isActive\": false\n}"
+                  "raw": "{\n  \"route_name\": \"Granite\",\n  \"method\": \"hack\",\n  \"uri\": \"dynamic\",\n  \"isDeleted\": false,\n  \"isActive\": true\n}"
                 },
                 "description": ""
               },
@@ -925,7 +1768,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"route_name\": \"IB\",\n  \"method\": \"Refined\",\n  \"uri\": \"Handmade\",\n  \"isDeleted\": true,\n  \"isActive\": false,\n  \"id\": \"{{id}}\"\n}"
+                  "raw": "{\n  \"route_name\": \"Granite\",\n  \"method\": \"hack\",\n  \"uri\": \"dynamic\",\n  \"isDeleted\": false,\n  \"isActive\": true,\n  \"id\": \"{{id}}\"\n}"
                 },
                 "description": ""
               },
@@ -1000,7 +1843,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"route_name\": \"IB\",\n  \"method\": \"Refined\",\n  \"uri\": \"Handmade\",\n  \"isDeleted\": true,\n  \"isActive\": false\n}"
+                  "raw": "{\n  \"route_name\": \"Granite\",\n  \"method\": \"hack\",\n  \"uri\": \"dynamic\",\n  \"isDeleted\": false,\n  \"isActive\": true\n}"
                 },
                 "description": ""
               },
@@ -1056,7 +1899,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"routeId\": \"610ba23f28c7457c10cd72b7\",\n  \"roleId\": \"610ba23f28c7457c10cd72b8\",\n  \"isDeleted\": false,\n  \"isActive\": true\n}"
+                  "raw": "{\n  \"routeId\": \"610ba82e513bb785706347b5\",\n  \"roleId\": \"610ba82e513bb785706347b6\",\n  \"isDeleted\": false,\n  \"isActive\": false\n}"
                 },
                 "description": ""
               },
@@ -1081,7 +1924,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"data\": [\n    {\n      \"routeId\": \"610ba23f28c7457c10cd72b7\",\n      \"roleId\": \"610ba23f28c7457c10cd72b8\",\n      \"isDeleted\": false,\n      \"isActive\": true\n    }\n  ]\n}"
+                  "raw": "{\n  \"data\": [\n    {\n      \"routeId\": \"610ba82e513bb785706347b5\",\n      \"roleId\": \"610ba82e513bb785706347b6\",\n      \"isDeleted\": false,\n      \"isActive\": false\n    }\n  ]\n}"
                 },
                 "description": ""
               },
@@ -1181,7 +2024,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"routeId\": \"610ba23f28c7457c10cd72b7\",\n  \"roleId\": \"610ba23f28c7457c10cd72b8\",\n  \"isDeleted\": false,\n  \"isActive\": true\n}"
+                  "raw": "{\n  \"routeId\": \"610ba82e513bb785706347b5\",\n  \"roleId\": \"610ba82e513bb785706347b6\",\n  \"isDeleted\": false,\n  \"isActive\": false\n}"
                 },
                 "description": ""
               },
@@ -1206,7 +2049,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"routeId\": \"610ba23f28c7457c10cd72b7\",\n  \"roleId\": \"610ba23f28c7457c10cd72b8\",\n  \"isDeleted\": false,\n  \"isActive\": true,\n  \"id\": \"{{id}}\"\n}"
+                  "raw": "{\n  \"routeId\": \"610ba82e513bb785706347b5\",\n  \"roleId\": \"610ba82e513bb785706347b6\",\n  \"isDeleted\": false,\n  \"isActive\": false,\n  \"id\": \"{{id}}\"\n}"
                 },
                 "description": ""
               },
@@ -1256,7 +2099,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"routeId\": \"610ba23f28c7457c10cd72b7\",\n  \"roleId\": \"610ba23f28c7457c10cd72b8\",\n  \"isDeleted\": false,\n  \"isActive\": true\n}"
+                  "raw": "{\n  \"routeId\": \"610ba82e513bb785706347b5\",\n  \"roleId\": \"610ba82e513bb785706347b6\",\n  \"isDeleted\": false,\n  \"isActive\": false\n}"
                 },
                 "description": ""
               },
@@ -1337,7 +2180,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"userId\": \"610ba23f28c7457c10cd72ba\",\n  \"roleId\": \"610ba23f28c7457c10cd72bb\",\n  \"isDeleted\": true,\n  \"isActive\": false\n}"
+                  "raw": "{\n  \"userId\": \"610ba82e513bb785706347b8\",\n  \"roleId\": \"610ba82e513bb785706347b9\",\n  \"isDeleted\": true,\n  \"isActive\": false\n}"
                 },
                 "description": ""
               },
@@ -1362,7 +2205,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"data\": [\n    {\n      \"userId\": \"610ba23f28c7457c10cd72ba\",\n      \"roleId\": \"610ba23f28c7457c10cd72bb\",\n      \"isDeleted\": true,\n      \"isActive\": false\n    }\n  ]\n}"
+                  "raw": "{\n  \"data\": [\n    {\n      \"userId\": \"610ba82e513bb785706347b8\",\n      \"roleId\": \"610ba82e513bb785706347b9\",\n      \"isDeleted\": true,\n      \"isActive\": false\n    }\n  ]\n}"
                 },
                 "description": ""
               },
@@ -1462,7 +2305,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"userId\": \"610ba23f28c7457c10cd72ba\",\n  \"roleId\": \"610ba23f28c7457c10cd72bb\",\n  \"isDeleted\": true,\n  \"isActive\": false\n}"
+                  "raw": "{\n  \"userId\": \"610ba82e513bb785706347b8\",\n  \"roleId\": \"610ba82e513bb785706347b9\",\n  \"isDeleted\": true,\n  \"isActive\": false\n}"
                 },
                 "description": ""
               },
@@ -1487,7 +2330,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"userId\": \"610ba23f28c7457c10cd72ba\",\n  \"roleId\": \"610ba23f28c7457c10cd72bb\",\n  \"isDeleted\": true,\n  \"isActive\": false,\n  \"id\": \"{{id}}\"\n}"
+                  "raw": "{\n  \"userId\": \"610ba82e513bb785706347b8\",\n  \"roleId\": \"610ba82e513bb785706347b9\",\n  \"isDeleted\": true,\n  \"isActive\": false,\n  \"id\": \"{{id}}\"\n}"
                 },
                 "description": ""
               },
@@ -1537,7 +2380,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"userId\": \"610ba23f28c7457c10cd72ba\",\n  \"roleId\": \"610ba23f28c7457c10cd72bb\",\n  \"isDeleted\": true,\n  \"isActive\": false\n}"
+                  "raw": "{\n  \"userId\": \"610ba82e513bb785706347b8\",\n  \"roleId\": \"610ba82e513bb785706347b9\",\n  \"isDeleted\": true,\n  \"isActive\": false\n}"
                 },
                 "description": ""
               },
@@ -1576,6 +2419,849 @@
       "name": "client",
       "description": "client APIs",
       "item": [
+        {
+          "name": "Value",
+          "description": "Value Model APIs",
+          "item": [
+            {
+              "name": "getValue",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/value/{{id}}",
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "addValue",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/value/create",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pair\": \"610ba82e513bb785706347ac\",\n  \"time\": \"2022-06-03T17:56:08.233Z\",\n  \"value\": 595,\n  \"isDeleted\": false,\n  \"isActive\": true\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "findAllValue",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/value/list",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {},\n  \"options\": {\n    \"select\": [\n      \"field 1\",\n      \"field 2\"\n    ],\n    \"collation\": \"\",\n    \"sort\": \"\",\n    \"populate\": \"\",\n    \"projection\": \"\",\n    \"lean\": false,\n    \"leanWithId\": true,\n    \"offset\": 0,\n    \"page\": 1,\n    \"limit\": 10,\n    \"customLabels\": {},\n    \"pagination\": true,\n    \"useEstimatedCount\": false,\n    \"useCustomCountFn\": false,\n    \"forceCountFn\": false,\n    \"read\": {},\n    \"options\": {}\n  },\n  \"isCountOnly\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "getValueCount",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/value/count",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"where\": {\n    \"isActive\": true\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "aggregateValue",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/value/aggregate",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"group\": {\n    \"avg\": {\n      \"key\": {\n        \"_id\": [\n          \"field1\",\n          \"field2\"\n        ]\n      }\n    },\n    \"sum\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"min\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"max\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"addToSet\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    }\n  },\n  \"match\": {\n    \"key\": {\n      \"field\": \"value\"\n    }\n  },\n  \"project\": {\n    \"gt\": {\n      \"key\": {\n        \"field\": \"value\"\n      }\n    }\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "insertBulkValue",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/value/addBulk",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"pair\": \"610ba82e513bb785706347ac\",\n      \"time\": \"2022-06-03T17:56:08.233Z\",\n      \"value\": 595,\n      \"isDeleted\": false,\n      \"isActive\": true\n    }\n  ]\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "updateValue",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/value/update/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pair\": \"610ba82e513bb785706347ac\",\n  \"time\": \"2022-06-03T17:56:08.233Z\",\n  \"value\": 595,\n  \"isDeleted\": false,\n  \"isActive\": true\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "partialupdateValue",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/value/partial-update/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isActive\": true,\n  \"isDeleted\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "softDeleteValue",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/value/softDelete/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "updateBulkValue",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/value/updateBulk",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"isActive\": true\n  },\n  \"data\": {\n    \"isDeleted\": false\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "deleteValue",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/value/delete/{{id}}",
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isWarning\": true\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            }
+          ]
+        },
+        {
+          "name": "Pair",
+          "description": "Pair Model APIs",
+          "item": [
+            {
+              "name": "getPair",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/pair/{{id}}",
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "addPair",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/pair/create",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Orville Jacobs\",\n  \"address\": \"60916 Paucek Throughway\",\n  \"token1\": \"610ba82e513bb785706347ae\",\n  \"token2\": \"610ba82e513bb785706347af\",\n  \"isDeleted\": true,\n  \"isActive\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "findAllPair",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/pair/list",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {},\n  \"options\": {\n    \"select\": [\n      \"field 1\",\n      \"field 2\"\n    ],\n    \"collation\": \"\",\n    \"sort\": \"\",\n    \"populate\": \"\",\n    \"projection\": \"\",\n    \"lean\": false,\n    \"leanWithId\": true,\n    \"offset\": 0,\n    \"page\": 1,\n    \"limit\": 10,\n    \"customLabels\": {},\n    \"pagination\": true,\n    \"useEstimatedCount\": false,\n    \"useCustomCountFn\": false,\n    \"forceCountFn\": false,\n    \"read\": {},\n    \"options\": {}\n  },\n  \"isCountOnly\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "getPairCount",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/pair/count",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"where\": {\n    \"isActive\": true\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "aggregatePair",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/pair/aggregate",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"group\": {\n    \"avg\": {\n      \"key\": {\n        \"_id\": [\n          \"field1\",\n          \"field2\"\n        ]\n      }\n    },\n    \"sum\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"min\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"max\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"addToSet\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    }\n  },\n  \"match\": {\n    \"key\": {\n      \"field\": \"value\"\n    }\n  },\n  \"project\": {\n    \"gt\": {\n      \"key\": {\n        \"field\": \"value\"\n      }\n    }\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "insertBulkPair",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/pair/addBulk",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"Orville Jacobs\",\n      \"address\": \"60916 Paucek Throughway\",\n      \"token1\": \"610ba82e513bb785706347ae\",\n      \"token2\": \"610ba82e513bb785706347af\",\n      \"isDeleted\": true,\n      \"isActive\": false\n    }\n  ]\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "updatePair",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/pair/update/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Orville Jacobs\",\n  \"address\": \"60916 Paucek Throughway\",\n  \"token1\": \"610ba82e513bb785706347ae\",\n  \"token2\": \"610ba82e513bb785706347af\",\n  \"isDeleted\": true,\n  \"isActive\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "partialupdatePair",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/pair/partial-update/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isActive\": true,\n  \"isDeleted\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "softDeletePair",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/pair/softDelete/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "updateBulkPair",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/pair/updateBulk",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"isActive\": true\n  },\n  \"data\": {\n    \"isDeleted\": false\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "deletePair",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/pair/delete/{{id}}",
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isWarning\": true\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            }
+          ]
+        },
+        {
+          "name": "Token",
+          "description": "Token Model APIs",
+          "item": [
+            {
+              "name": "getToken",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/token/{{id}}",
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "addToken",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/token/create",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Glenn Marquardt\",\n  \"symbol\": \"Credit\",\n  \"address\": \"654 Sheldon Ports\",\n  \"isDeleted\": false,\n  \"isActive\": true\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "findAllToken",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/token/list",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {},\n  \"options\": {\n    \"select\": [\n      \"field 1\",\n      \"field 2\"\n    ],\n    \"collation\": \"\",\n    \"sort\": \"\",\n    \"populate\": \"\",\n    \"projection\": \"\",\n    \"lean\": false,\n    \"leanWithId\": true,\n    \"offset\": 0,\n    \"page\": 1,\n    \"limit\": 10,\n    \"customLabels\": {},\n    \"pagination\": true,\n    \"useEstimatedCount\": false,\n    \"useCustomCountFn\": false,\n    \"forceCountFn\": false,\n    \"read\": {},\n    \"options\": {}\n  },\n  \"isCountOnly\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "getTokenCount",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/token/count",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"where\": {\n    \"isActive\": true\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "aggregateToken",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/token/aggregate",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"group\": {\n    \"avg\": {\n      \"key\": {\n        \"_id\": [\n          \"field1\",\n          \"field2\"\n        ]\n      }\n    },\n    \"sum\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"min\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"max\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    },\n    \"addToSet\": {\n      \"key\": {\n        \"_id\": \"field\"\n      }\n    }\n  },\n  \"match\": {\n    \"key\": {\n      \"field\": \"value\"\n    }\n  },\n  \"project\": {\n    \"gt\": {\n      \"key\": {\n        \"field\": \"value\"\n      }\n    }\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "insertBulkToken",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/token/addBulk",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"name\": \"Glenn Marquardt\",\n      \"symbol\": \"Credit\",\n      \"address\": \"654 Sheldon Ports\",\n      \"isDeleted\": false,\n      \"isActive\": true\n    }\n  ]\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "updateToken",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/token/update/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Glenn Marquardt\",\n  \"symbol\": \"Credit\",\n  \"address\": \"654 Sheldon Ports\",\n  \"isDeleted\": false,\n  \"isActive\": true\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "partialupdateToken",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/token/partial-update/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isActive\": true,\n  \"isDeleted\": false\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "softDeleteToken",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/token/softDelete/{{id}}",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "updateBulkToken",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/token/updateBulk",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"isActive\": true\n  },\n  \"data\": {\n    \"isDeleted\": false\n  }\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "deleteToken",
+              "request": {
+                "url": "http://localhost:3000/client/api/v1/token/delete/{{id}}",
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isWarning\": true\n}"
+                },
+                "description": ""
+              },
+              "_postman_isSubFolder": true
+            }
+          ]
+        },
         {
           "name": "user",
           "description": "user Model APIs",
@@ -1624,7 +3310,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"username\": \"Ron Buckridge\",\n  \"password\": \"yhCi9jcrhOHqJ5k\",\n  \"email\": \"Raymond_Abernathy@yahoo.com\",\n  \"name\": \"Dr. Carla Doyle\",\n  \"isDeleted\": false,\n  \"isActive\": true,\n  \"role\": 1\n}"
+                  "raw": "{\n  \"username\": \"Max Hamill\",\n  \"password\": \"nsOP69Js1x5RaL9\",\n  \"email\": \"Lizeth_Medhurst5@yahoo.com\",\n  \"name\": \"Nina Erdman Jr.\",\n  \"isDeleted\": false,\n  \"isActive\": false,\n  \"role\": 1\n}"
                 },
                 "description": ""
               },
@@ -1724,7 +3410,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"data\": [\n    {\n      \"username\": \"Ron Buckridge\",\n      \"password\": \"yhCi9jcrhOHqJ5k\",\n      \"email\": \"Raymond_Abernathy@yahoo.com\",\n      \"name\": \"Dr. Carla Doyle\",\n      \"isDeleted\": false,\n      \"isActive\": true,\n      \"role\": 1\n    }\n  ]\n}"
+                  "raw": "{\n  \"data\": [\n    {\n      \"username\": \"Max Hamill\",\n      \"password\": \"nsOP69Js1x5RaL9\",\n      \"email\": \"Lizeth_Medhurst5@yahoo.com\",\n      \"name\": \"Nina Erdman Jr.\",\n      \"isDeleted\": false,\n      \"isActive\": false,\n      \"role\": 1\n    }\n  ]\n}"
                 },
                 "description": ""
               },
@@ -1749,7 +3435,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"username\": \"Ron Buckridge\",\n  \"password\": \"yhCi9jcrhOHqJ5k\",\n  \"email\": \"Raymond_Abernathy@yahoo.com\",\n  \"name\": \"Dr. Carla Doyle\",\n  \"isDeleted\": false,\n  \"isActive\": true,\n  \"role\": 1\n}"
+                  "raw": "{\n  \"username\": \"Max Hamill\",\n  \"password\": \"nsOP69Js1x5RaL9\",\n  \"email\": \"Lizeth_Medhurst5@yahoo.com\",\n  \"name\": \"Nina Erdman Jr.\",\n  \"isDeleted\": false,\n  \"isActive\": false,\n  \"role\": 1\n}"
                 },
                 "description": ""
               },
@@ -1849,7 +3535,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"username\": \"Ron Buckridge\",\n  \"password\": \"yhCi9jcrhOHqJ5k\",\n  \"email\": \"Raymond_Abernathy@yahoo.com\",\n  \"name\": \"Dr. Carla Doyle\",\n  \"isDeleted\": false,\n  \"isActive\": true,\n  \"role\": 1\n}"
+                  "raw": "{\n  \"username\": \"Max Hamill\",\n  \"password\": \"nsOP69Js1x5RaL9\",\n  \"email\": \"Lizeth_Medhurst5@yahoo.com\",\n  \"name\": \"Nina Erdman Jr.\",\n  \"isDeleted\": false,\n  \"isActive\": false,\n  \"role\": 1\n}"
                 },
                 "description": ""
               },
@@ -1920,7 +3606,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"username\": \"Ron Buckridge\",\n  \"password\": \"yhCi9jcrhOHqJ5k\",\n  \"email\": \"Raymond_Abernathy@yahoo.com\",\n  \"name\": \"Dr. Carla Doyle\",\n  \"isDeleted\": false,\n  \"isActive\": true,\n  \"role\": 1\n}"
+                  "raw": "{\n  \"username\": \"Max Hamill\",\n  \"password\": \"nsOP69Js1x5RaL9\",\n  \"email\": \"Lizeth_Medhurst5@yahoo.com\",\n  \"name\": \"Nina Erdman Jr.\",\n  \"isDeleted\": false,\n  \"isActive\": false,\n  \"role\": 1\n}"
                 },
                 "description": ""
               },

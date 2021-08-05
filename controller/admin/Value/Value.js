@@ -1,20 +1,20 @@
 const message = require('../../../utils/messages');
 const responseCode = require('../../../utils/responseCode');
-function makeTokenController ({
-  TokenService,makeToken
+function makeValueController ({
+  ValueService,makeValue
 })
 {
-  const addToken = async ({ data }) => {
+  const addValue = async ({ data }) => {
     try {
       const originalData = data;
 
-      const Token = makeToken(originalData,'insertTokenValidator');
-      let createdToken = await TokenService.createDocument(Token);
+      const Value = makeValue(originalData,'insertValueValidator');
+      let createdValue = await ValueService.createDocument(Value);
             
       return message.successResponse(
         { 'Content-Type': 'application/json' },
         responseCode.success,
-        createdToken
+        createdValue
       );
 
     } catch (error){
@@ -32,7 +32,7 @@ function makeTokenController ({
       );
     }
   };
-  const findAllToken = async ({ data }) => {
+  const findAllValue = async ({ data }) => {
     try {
       let options = {};
       let query = {};
@@ -41,7 +41,7 @@ function makeTokenController ({
         if (data.query !== undefined) {
           query = { ...data.query };
         }
-        result = await TokenService.countDocument(query);
+        result = await ValueService.countDocument(query);
         if (result) {
           result = { totalRecords: result };  
         } else {
@@ -63,7 +63,7 @@ function makeTokenController ({
         if (data.query !== undefined){
           query = { ...data.query };
         }
-        result = await TokenService.getAllDocuments(query,options);
+        result = await ValueService.getAllDocuments(query,options);
       }
            
       if (result.data){
@@ -89,14 +89,14 @@ function makeTokenController ({
       );
     }
   };
-  const getTokenById = async (id) =>{
+  const getValueById = async (id) =>{
     try {
       if (id){
-        const Token = await TokenService.getSingleDocumentById(id);
+        const Value = await ValueService.getSingleDocumentById(id);
         return message.successResponse(
           { 'Content-Type': 'application/json' },
           responseCode.success,
-          Token
+          Value
         );
       }
       return message.badRequest(
@@ -113,13 +113,13 @@ function makeTokenController ({
       );
     }
   };
-  const getTokenCount = async (data) => {
+  const getValueCount = async (data) => {
     try {
       let where = {};
       if (data.where){
         where = data.where;
       }
-      let result = await TokenService.countDocument(where);
+      let result = await ValueService.countDocument(where);
       if (result){
         result = { totalRecords:result };
         return message.successResponse(
@@ -143,10 +143,10 @@ function makeTokenController ({
       );
     }
   };
-  const getTokenByAggregate = async ({ data }) =>{
+  const getValueByAggregate = async ({ data }) =>{
     try {
       if (data){
-        let result = await TokenService.getDocumentByAggregation(data);
+        let result = await ValueService.getDocumentByAggregation(data);
         if (result){
           return message.successResponse(
             { 'Content-Type': 'application/json' },
@@ -168,18 +168,18 @@ function makeTokenController ({
       ); 
     }
   };
-  const updateToken = async (data,id) =>{
+  const updateValue = async (data,id) =>{
     try {
       if (id && data){
-        const Token = makeToken(data,'updateTokenValidator');
-        const filterData = removeEmpty(Token);
+        const Value = makeValue(data,'updateValueValidator');
+        const filterData = removeEmpty(Value);
         const query = { _id:id };
-        let updatedToken = await TokenService.findOneAndUpdateDocument(query,filterData,{ new:true });
-        if (updatedToken){
+        let updatedValue = await ValueService.findOneAndUpdateDocument(query,filterData,{ new:true });
+        if (updatedValue){
           return message.successResponse(
             { 'Content-Type': 'application/json' },
             responseCode.success,
-            updatedToken
+            updatedValue
           );
         }
       }
@@ -204,18 +204,18 @@ function makeTokenController ({
       );
     }
   };
-  const partialUpdateToken = async (data,id) => {
+  const partialUpdateValue = async (data,id) => {
     try {
       if (id && data){
-        const Token = makeToken(data,'updateTokenValidator');
-        const filterData = removeEmpty(Token);
+        const Value = makeValue(data,'updateValueValidator');
+        const filterData = removeEmpty(Value);
         const query = { _id:id };
-        let updatedToken = await TokenService.findOneAndUpdateDocument(query,filterData,{ new:true });
-        if (updatedToken){
+        let updatedValue = await ValueService.findOneAndUpdateDocument(query,filterData,{ new:true });
+        if (updatedValue){
           return message.successResponse(
             { 'Content-Type': 'application/json' },
             responseCode.success,
-            updatedToken
+            updatedValue
           );
         }
         else {
@@ -249,26 +249,21 @@ function makeTokenController ({
       );
     }
   };
-  const softDeleteToken = async (id) => {
+  const softDeleteValue = async (id)=>{
     try {
-      const deleteDependentService = require('../../../utils/deleteDependent');
-      let pos = [
-        {
-          model: 'Pair',
-          refId: 'token1' 
-        },
-        {
-          model: 'Pair',
-          refId: 'token2' 
-        }
-      ];
-      await TokenService.softDeleteDocument(id);
-      let result = await deleteDependentService.softDeleteToken({ _id: id });
-      return message.successResponse(
+      if (id){
+        let updatedValue = await ValueService.softDeleteDocument(id);
+        return message.successResponse(
+          { 'Content-Type': 'application/json' },
+          responseCode.success,
+          updatedValue
+        );
+      }
+      return message.badRequest(
         { 'Content-Type': 'application/json' },
-        responseCode.success,
-        result);
-            
+        responseCode.badRequest,
+        {}
+      );
     } catch (error){
       return message.failureResponse(
         { 'Content-Type': 'application/json' },
@@ -277,11 +272,11 @@ function makeTokenController ({
       );
     }
   };
-  const bulkInsertToken = async ({ body }) => {
+  const bulkInsertValue = async ({ body }) => {
     try {
       let data = body.data;
-      const TokenEntities = body.data.map((item)=>makeToken(item,'insertTokenValidator'));
-      const results = await TokenService.bulkInsert(TokenEntities);
+      const ValueEntities = body.data.map((item)=>makeValue(item,'insertValueValidator'));
+      const results = await ValueService.bulkInsert(ValueEntities);
       return message.successResponse(
         { 'Content-Type': 'application/json' },
         responseCode.success,
@@ -302,16 +297,16 @@ function makeTokenController ({
       );
     }
   };
-  const bulkUpdateToken = async (data) => {
+  const bulkUpdateValue = async (data) => {
     try {
       if (data.filter && data.data){
-        const Token = makeToken(data.data,'updateTokenValidator');
-        const filterData = removeEmpty(Token);
-        const updatedTokens = await TokenService.bulkUpdate(data.filter,filterData);
+        const Value = makeValue(data.data,'updateValueValidator');
+        const filterData = removeEmpty(Value);
+        const updatedValues = await ValueService.bulkUpdate(data.filter,filterData);
         return message.successResponse(
           { 'Content-Type': 'application/json' },
           responseCode.success,
-          updatedTokens
+          updatedValues
         );
       }
       return message.badRequest(
@@ -332,52 +327,24 @@ function makeTokenController ({
         error.message);
     }
   };
-  const deleteToken = async (data,id) => {
+  const deleteValue = async (data,id) => {
     try {
-      let possibleDependent = [
-        {
-          model: 'Pair',
-          refId: 'token1' 
-        },
-        {
-          model: 'Pair',
-          refId: 'token2' 
-        }
-      ];
-      const deleteDependentService = require('../../../utils/deleteDependent');
-      const query = { _id:id };
-      if (data.isWarning) {
-        let all = await deleteDependentService.countToken(query);
+      if (id){
+        const query = { _id:id };
+        let deletedValue = await ValueService.findOneAndDeleteDocument({ _id:id });
         return message.successResponse(
           { 'Content-Type': 'application/json' },
           responseCode.success,
-          all
+          deletedValue
         );
-      } else {
-        let result = await deleteDependentService.deleteToken(query);
-        if (result){
-          return message.successResponse(
-            { 'Content-Type': 'application/json' },
-            responseCode.success,
-            result
-          );
-                    
-        }
+                
       }
       return message.badRequest(
         { 'Content-Type': 'application/json' },
         responseCode.badRequest,
         {}
       );
-    }
-    catch (error){
-      if (error.name === 'ValidationError'){
-        return message.inValidParam(
-          { 'Content-Type': 'application/json' },
-          responseCode.validationError,
-          error.message
-        );
-      }
+    } catch (error){
       return message.failureResponse(
         { 'Content-Type': 'application/json' },
         responseCode.internalServerError,
@@ -395,19 +362,19 @@ function makeTokenController ({
     return newObj;
   };
   return Object.freeze({
-    addToken,
-    findAllToken,
-    getTokenById,
-    getTokenCount,
-    getTokenByAggregate,
-    updateToken,
-    partialUpdateToken,
-    softDeleteToken,
-    bulkInsertToken,
-    bulkUpdateToken,
-    deleteToken,
+    addValue,
+    findAllValue,
+    getValueById,
+    getValueCount,
+    getValueByAggregate,
+    updateValue,
+    partialUpdateValue,
+    softDeleteValue,
+    bulkInsertValue,
+    bulkUpdateValue,
+    deleteValue,
     removeEmpty,
   });
 }
 
-module.exports = makeTokenController;
+module.exports = makeValueController;
