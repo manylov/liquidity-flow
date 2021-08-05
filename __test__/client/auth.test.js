@@ -17,12 +17,12 @@ describe('POST /register -> if email and username is given', () => {
     let registeredUser = await request(app)
       .post('/client/auth/register')
       .send({
-        username: 'Kathleen Fadel',
-        password: 'sL1xYvSW7ybbTCO',
-        email: 'Jacinthe2@hotmail.com',
-        name: 'Sylvia Hermann',
-        isDeleted: true,
-        isActive: true,
+        username: 'Lester Anderson',
+        password: '72ViuMO2654z7ex',
+        email: 'Eloise9@yahoo.com',
+        name: 'Ellen Kuhlman',
+        isDeleted: false,
+        isActive: false,
         role: 1
       });
 
@@ -38,8 +38,8 @@ describe('POST /login -> if username and password is correct', () => {
     let user = await request(app)
       .post('/client/auth/login')
       .send({
-        password: 'sL1xYvSW7ybbTCO',
-        username: 'Jacinthe2@hotmail.com' 
+        password: '72ViuMO2654z7ex',
+        username: 'Eloise9@yahoo.com' 
       });
 
     expect(user.headers['content-type']).toEqual('application/json; charset=utf-8');
@@ -57,8 +57,8 @@ describe('POST /login -> if username is incorrect', () => {
     let user = await request(app)
       .post('/client/auth/login')
       .send({
-        password: 'sL1xYvSW7ybbTCO',
-        username: 'wrongJacinthe2@hotmail.com' 
+        password: '72ViuMO2654z7ex',
+        username: 'wrongEloise9@yahoo.com' 
       });
 
     expect(user.headers['content-type']).toEqual('application/json; charset=utf-8');
@@ -72,8 +72,8 @@ describe('POST /login -> if password is incorrect', () => {
     let user = await request(app)
       .post('/client/auth/login')
       .send({
-        password: 'wrongsL1xYvSW7ybbTCO',
-        username: 'Jacinthe2@hotmail.com' 
+        password: 'wrong72ViuMO2654z7ex',
+        username: 'Eloise9@yahoo.com' 
       });
 
     expect(user.headers['content-type']).toEqual('application/json; charset=utf-8');

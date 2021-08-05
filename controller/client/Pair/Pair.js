@@ -249,21 +249,20 @@ function makePairController ({
       );
     }
   };
-  const softDeletePair = async (id)=>{
+  const softDeletePair = async (id) => {
     try {
-      if (id){
-        let updatedPair = await PairService.softDeleteDocument(id);
-        return message.successResponse(
-          { 'Content-Type': 'application/json' },
-          responseCode.success,
-          updatedPair
-        );
-      }
-      return message.badRequest(
+      const deleteDependentService = require('../../../utils/deleteDependent');
+      let pos = [ {
+        model: 'Value',
+        refId: 'pair' 
+      } ];
+      await PairService.softDeleteDocument(id);
+      let result = await deleteDependentService.softDeletePair({ _id: id });
+      return message.successResponse(
         { 'Content-Type': 'application/json' },
-        responseCode.badRequest,
-        {}
-      );
+        responseCode.success,
+        result);
+            
     } catch (error){
       return message.failureResponse(
         { 'Content-Type': 'application/json' },
@@ -329,22 +328,44 @@ function makePairController ({
   };
   const deletePair = async (data,id) => {
     try {
-      if (id){
-        const query = { _id:id };
-        let deletedPair = await PairService.findOneAndDeleteDocument({ _id:id });
+      let possibleDependent = [ {
+        model: 'Value',
+        refId: 'pair' 
+      } ];
+      const deleteDependentService = require('../../../utils/deleteDependent');
+      const query = { _id:id };
+      if (data.isWarning) {
+        let all = await deleteDependentService.countPair(query);
         return message.successResponse(
           { 'Content-Type': 'application/json' },
           responseCode.success,
-          deletedPair
+          all
         );
-                
+      } else {
+        let result = await deleteDependentService.deletePair(query);
+        if (result){
+          return message.successResponse(
+            { 'Content-Type': 'application/json' },
+            responseCode.success,
+            result
+          );
+                    
+        }
       }
       return message.badRequest(
         { 'Content-Type': 'application/json' },
         responseCode.badRequest,
         {}
       );
-    } catch (error){
+    }
+    catch (error){
+      if (error.name === 'ValidationError'){
+        return message.inValidParam(
+          { 'Content-Type': 'application/json' },
+          responseCode.validationError,
+          error.message
+        );
+      }
       return message.failureResponse(
         { 'Content-Type': 'application/json' },
         responseCode.internalServerError,

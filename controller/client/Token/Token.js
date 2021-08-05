@@ -249,21 +249,26 @@ function makeTokenController ({
       );
     }
   };
-  const softDeleteToken = async (id)=>{
+  const softDeleteToken = async (id) => {
     try {
-      if (id){
-        let updatedToken = await TokenService.softDeleteDocument(id);
-        return message.successResponse(
-          { 'Content-Type': 'application/json' },
-          responseCode.success,
-          updatedToken
-        );
-      }
-      return message.badRequest(
+      const deleteDependentService = require('../../../utils/deleteDependent');
+      let pos = [
+        {
+          model: 'Pair',
+          refId: 'token1' 
+        },
+        {
+          model: 'Pair',
+          refId: 'token2' 
+        }
+      ];
+      await TokenService.softDeleteDocument(id);
+      let result = await deleteDependentService.softDeleteToken({ _id: id });
+      return message.successResponse(
         { 'Content-Type': 'application/json' },
-        responseCode.badRequest,
-        {}
-      );
+        responseCode.success,
+        result);
+            
     } catch (error){
       return message.failureResponse(
         { 'Content-Type': 'application/json' },
@@ -329,22 +334,50 @@ function makeTokenController ({
   };
   const deleteToken = async (data,id) => {
     try {
-      if (id){
-        const query = { _id:id };
-        let deletedToken = await TokenService.findOneAndDeleteDocument({ _id:id });
+      let possibleDependent = [
+        {
+          model: 'Pair',
+          refId: 'token1' 
+        },
+        {
+          model: 'Pair',
+          refId: 'token2' 
+        }
+      ];
+      const deleteDependentService = require('../../../utils/deleteDependent');
+      const query = { _id:id };
+      if (data.isWarning) {
+        let all = await deleteDependentService.countToken(query);
         return message.successResponse(
           { 'Content-Type': 'application/json' },
           responseCode.success,
-          deletedToken
+          all
         );
-                
+      } else {
+        let result = await deleteDependentService.deleteToken(query);
+        if (result){
+          return message.successResponse(
+            { 'Content-Type': 'application/json' },
+            responseCode.success,
+            result
+          );
+                    
+        }
       }
       return message.badRequest(
         { 'Content-Type': 'application/json' },
         responseCode.badRequest,
         {}
       );
-    } catch (error){
+    }
+    catch (error){
+      if (error.name === 'ValidationError'){
+        return message.inValidParam(
+          { 'Content-Type': 'application/json' },
+          responseCode.validationError,
+          error.message
+        );
+      }
       return message.failureResponse(
         { 'Content-Type': 'application/json' },
         responseCode.internalServerError,
